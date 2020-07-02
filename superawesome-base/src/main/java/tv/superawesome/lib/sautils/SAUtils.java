@@ -580,4 +580,24 @@ public class SAUtils {
 
         return target != null && !target.toString().isEmpty() && pattern.matcher(target).matches();
     }
+
+    /**
+     * Check weather a view is currently on screen and visible
+     *
+     * @param view to be checked
+     * @return true if the view is visible, false otherwise
+     */
+    public static boolean isViewVisibleOnScreen(final View view) {
+        if (view == null || !view.isShown()) {
+            return false;
+        }
+
+        final DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
+        final Rect screenRect = new Rect(0, 0, metrics.widthPixels, metrics.heightPixels);
+
+        final Rect viewRect = new Rect();
+        view.getGlobalVisibleRect(viewRect);
+
+        return viewRect.intersect(screenRect);
+    }
 }

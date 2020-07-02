@@ -1,7 +1,6 @@
 package tv.superawesome.lib.saevents;
 
 import android.app.Application;
-import android.content.Context;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.VideoView;
@@ -15,6 +14,7 @@ public class SAEvents {
     private SAVASTModule                vastModule;
     private SAMoatModule                moatModule;
     private SAViewableModule            viewableModule;
+    private SAViewTimeModule            viewTimeModule;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Set & unset the ad needed for triggering events
@@ -25,6 +25,7 @@ public class SAEvents {
         vastModule = new SAVASTModule(ad);
         moatModule = new SAMoatModule(ad, true);
         viewableModule = new SAViewableModule();
+        viewTimeModule = new SAViewTimeModule();
     }
 
     public void unsetAd () {
@@ -32,6 +33,7 @@ public class SAEvents {
         vastModule = null;
         moatModule = null;
         viewableModule = null;
+        viewTimeModule = null;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -52,6 +54,12 @@ public class SAEvents {
 
     public void triggerViewableImpressionEvent () {
         if (serverModule != null) {
+            serverModule.triggerViewableImpressionEvent(null);
+        }
+    }
+
+    public void triggerViewTimeEvent(int seconds) {
+        if(serverModule != null) {
             serverModule.triggerViewableImpressionEvent(null);
         }
     }
@@ -149,6 +157,22 @@ public class SAEvents {
     public void triggerVASTClickTrackingEvent () {
         if (vastModule != null) {
             vastModule.triggerVASTClickTrackingEvent(null);
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // View Time
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void observeViewTime(ViewGroup view, SAViewTimeModule.Listener listener) {
+        if (viewTimeModule != null) {
+            viewTimeModule.observeViewTime(view, listener);
+        }
+    }
+
+    public void stopViewTime() {
+        if(viewTimeModule != null) {
+            viewTimeModule.stop();
         }
     }
 

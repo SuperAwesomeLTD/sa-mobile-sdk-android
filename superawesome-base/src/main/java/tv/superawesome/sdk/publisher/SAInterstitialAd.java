@@ -185,6 +185,13 @@ public class SAInterstitialAd extends Activity implements SABannerAd.VisibilityL
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }
 
+    @Override
+    protected void onDestroy() {
+        Log.d("SuperAwesome", "SAInterstitialAd.onDestroy()");
+        super.onDestroy();
+        close();
+    }
+
     /**********************************************************************************************
      * Class public interface - static methods to interact with an Interstitial Ad
      **********************************************************************************************/

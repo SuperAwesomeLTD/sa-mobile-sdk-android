@@ -17,6 +17,7 @@ import tv.superawesome.lib.saadloader.SALoader;
 import tv.superawesome.lib.saadloader.SALoaderInterface;
 import tv.superawesome.lib.sabumperpage.SABumperPage;
 import tv.superawesome.lib.saevents.SAEvents;
+import tv.superawesome.lib.saevents.SAViewTimeModule;
 import tv.superawesome.lib.saevents.SAViewableModule;
 import tv.superawesome.lib.samodelspace.saad.SAAd;
 import tv.superawesome.lib.samodelspace.saad.SACampaignType;
@@ -234,6 +235,13 @@ public class SABannerAd extends FrameLayout {
                         // events are fired
                         case Web_Loaded: {
 
+                            events.observeViewTime(SABannerAd.this, new SAViewTimeModule.Listener() {
+                                @Override
+                                public void onViewTimeObserved(int seconds) {
+                                    Log.d("SuperAwesome", "onViewTimeObserved:" + seconds);
+                                }
+                            });
+
                             // send viewable impression
                             events.checkViewableStatusForDisplay(SABannerAd.this, new SAViewableModule.Listener() {
                                 @Override
@@ -442,6 +450,8 @@ public class SABannerAd extends FrameLayout {
         } else {
             Log.w("AwesomeAds", "Banner Ad listener not implemented. Event would have been adClosed");
         }
+
+        events.stopViewTime();
         
         // unregister moat events
         events.stopMoatTrackingForDisplay();
@@ -486,6 +496,13 @@ public class SABannerAd extends FrameLayout {
 
     public SAAd getAd () {
         return ad;
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        Log.d("SuperAwesome", "SABannerAd.onDetachedFromWindow: " +  this.hashCode());
+        events.stopViewTime();
     }
 
     private void showParentalGateIfNeededWithCompletion(final Context context,

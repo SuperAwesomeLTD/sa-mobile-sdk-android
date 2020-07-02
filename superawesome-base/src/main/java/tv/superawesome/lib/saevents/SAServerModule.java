@@ -12,6 +12,7 @@ import tv.superawesome.lib.saevents.events.SAPGFailEvent;
 import tv.superawesome.lib.saevents.events.SAPGOpenEvent;
 import tv.superawesome.lib.saevents.events.SAPGSuccessEvent;
 import tv.superawesome.lib.saevents.events.SAURLEvent;
+import tv.superawesome.lib.saevents.events.SAViewTimeEvent;
 import tv.superawesome.lib.saevents.events.SAViewableImpressionEvent;
 import tv.superawesome.lib.samodelspace.saad.SAAd;
 import tv.superawesome.lib.sasession.session.ISASession;
@@ -21,6 +22,7 @@ public class SAServerModule {
     private SAClickEvent                clickEvent = null;
     private SAImpressionEvent           impressionEvent = null;
     private SAViewableImpressionEvent   viewableImpressionEvent = null;
+    private SAViewTimeEvent             viewTimeEvent = null;
     private SAPGOpenEvent               sapgOpenEvent = null;
     private SAPGCloseEvent              sapgCloseEvent = null;
     private SAPGFailEvent               sapgFailEvent = null;
@@ -34,6 +36,7 @@ public class SAServerModule {
         clickEvent = new SAClickEvent(ad, session, executor, timeout, isDebug);
         impressionEvent = new SAImpressionEvent(ad, session, executor, timeout, isDebug);
         viewableImpressionEvent = new SAViewableImpressionEvent(ad, session, executor, timeout, isDebug);
+        viewTimeEvent = new SAViewTimeEvent(ad, session, executor, timeout, isDebug);
         sapgOpenEvent = new SAPGOpenEvent(ad, session, executor, timeout, isDebug);
         sapgCloseEvent = new SAPGCloseEvent(ad, session, executor, timeout, isDebug);
         sapgFailEvent = new SAPGFailEvent(ad, session, executor, timeout, isDebug);
@@ -55,6 +58,12 @@ public class SAServerModule {
     public void triggerViewableImpressionEvent (SAURLEvent.Listener listener) {
         if (viewableImpressionEvent != null) {
             viewableImpressionEvent.triggerEvent(listener);
+        }
+    }
+
+    public void triggerViewTimeEvent (SAURLEvent.Listener listener, int seconds) {
+        if (viewTimeEvent != null) {
+            viewTimeEvent.triggerEvent(listener);
         }
     }
 

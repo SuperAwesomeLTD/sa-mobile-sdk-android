@@ -1,5 +1,6 @@
 package tv.superawesome.sdk.publisher;
 
+import android.util.Log;
 import android.view.ViewGroup;
 
 import tv.superawesome.lib.saevents.SAEvents;
@@ -34,17 +35,22 @@ public class SAVideoEvents {
     }
 
     public void complete(IVideoPlayer videoPlayer, int time, int duration) {
+        Log.d("SuperAwesome", " SAVideoEvents.complete: time: " + time + " duration: " + duration);
         events.sendMoatCompleteEvent(duration);
         events.triggerVASTCompleteEvent();
         events.stopMoatTrackingForVideoPlayer();
     }
 
     public void error(IVideoPlayer videoPlayer, int time, int duration) {
+        Log.d("SuperAwesome", " SAVideoEvents.error: time: " + time + " duration: " + duration);
+
         events.stopMoatTrackingForVideoPlayer();
         events.triggerVASTErrorEvent();
     }
 
     public void time(IVideoPlayer videoPlayer, int time, int duration) {
+        Log.d("SuperAwesome", "SAVideoEvents.time: time: " + time + " duration: " + duration);
+
         // Start
         if (time >= 1 && !isStartHandled) {
             isStartHandled = true;
