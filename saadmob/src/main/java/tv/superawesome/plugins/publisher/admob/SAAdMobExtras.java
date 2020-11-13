@@ -9,35 +9,37 @@ import tv.superawesome.sdk.publisher.SAOrientation;
 
 public class SAAdMobExtras {
 
-    static final String kKEY_TEST           = "SA_TEST_MODE";
-    static final String kKEY_TRANSPARENT    = "SA_TRANSPARENT";
-    static final String kKEY_ORIENTATION    = "SA_ORIENTATION";
-    static final String kKEY_CONFIGURATION  = "SA_CONFIGURATION";
-    static final String kKEY_PARENTAL_GATE  = "SA_PG";
-    static final String kKEY_BUMPER_PAGE    = "SA_BUMPER";
-    static final String kKEY_BACK_BUTTON    = "SA_BACK_BUTTON";
-    static final String kKEY_CLOSE_BUTTON   = "SA_CLOSE_BUTTON";
-    static final String kKEY_CLOSE_AT_END   = "SA_CLOSE_AT_END";
-    static final String kKEY_SMALL_CLICK    = "SA_SMALL_CLICK";
-    static final String kKEY_PLAYBACK_MODE  = "SA_PLAYBACK_MODE";
+    public static final String kKEY_TEST = "SA_TEST_MODE";
+    public static final String kKEY_TRANSPARENT = "SA_TRANSPARENT";
+    public static final String kKEY_ORIENTATION = "SA_ORIENTATION";
+    public static final String kKEY_CONFIGURATION = "SA_CONFIGURATION";
+    public static final String kKEY_PARENTAL_GATE = "SA_PG";
+    public static final String kKEY_BUMPER_PAGE = "SA_BUMPER";
+    public static final String kKEY_BACK_BUTTON = "SA_BACK_BUTTON";
+    public static final String kKEY_CLOSE_BUTTON = "SA_CLOSE_BUTTON";
+    public static final String kKEY_CLOSE_AT_END = "SA_CLOSE_AT_END";
+    public static final String kKEY_SMALL_CLICK = "SA_SMALL_CLICK";
+    public static final String kKEY_CLOSE_WARNING = "SA_CLOSE_WARNING";
+    public static final String kKEY_PLAYBACK_MODE = "SA_PLAYBACK_MODE";
 
-    private boolean transparent             = SADefaults.defaultBgColor();
-    private boolean testMode                = SADefaults.defaultTestMode();
-    private SAOrientation orientation       = SADefaults.defaultOrientation();
-    private SAConfiguration configuration   = SADefaults.defaultConfiguration();
-    private SARTBStartDelay playback        = SADefaults.defaultPlaybackMode();
-    private boolean parentalGate            = SADefaults.defaultParentalGate();
-    private boolean bumperPage              = SADefaults.defaultBumperPage();
-    private boolean backButton              = SADefaults.defaultBackButton();
-    private boolean closeButton             = SADefaults.defaultCloseButton();
-    private boolean closeAtEnd              = SADefaults.defaultCloseAtEnd();
-    private boolean smallClick              = SADefaults.defaultSmallClick();
+    private boolean transparent = SADefaults.defaultBgColor();
+    private boolean testMode = SADefaults.defaultTestMode();
+    private SAOrientation orientation = SADefaults.defaultOrientation();
+    private SAConfiguration configuration = SADefaults.defaultConfiguration();
+    private SARTBStartDelay playback = SADefaults.defaultPlaybackMode();
+    private boolean parentalGate = SADefaults.defaultParentalGate();
+    private boolean bumperPage = SADefaults.defaultBumperPage();
+    private boolean backButton = SADefaults.defaultBackButton();
+    private boolean closeButton = SADefaults.defaultCloseButton();
+    private boolean closeAtEnd = SADefaults.defaultCloseAtEnd();
+    private boolean smallClick = SADefaults.defaultSmallClick();
+    private boolean closeWithWarning = SADefaults.defaultCloseWarning();
 
     private SAAdMobExtras() {
         //
     }
 
-    public static SAAdMobExtras extras () {
+    public static SAAdMobExtras extras() {
         return new SAAdMobExtras();
     }
 
@@ -91,12 +93,17 @@ public class SAAdMobExtras {
         return this;
     }
 
-    public SAAdMobExtras setPlayabckMode (SARTBStartDelay mode) {
+    public SAAdMobExtras setPlaybackMode(SARTBStartDelay mode) {
         playback = mode;
         return this;
     }
 
-    public Bundle build () {
+    public SAAdMobExtras setCloseWithWarning(boolean value) {
+        closeWithWarning = value;
+        return this;
+    }
+
+    public Bundle build() {
         Bundle bundle = new Bundle();
         bundle.putBoolean(kKEY_TEST, testMode);
         bundle.putBoolean(kKEY_TRANSPARENT, transparent);
@@ -109,6 +116,7 @@ public class SAAdMobExtras {
         bundle.putBoolean(kKEY_CLOSE_BUTTON, closeButton);
         bundle.putBoolean(kKEY_CLOSE_AT_END, closeAtEnd);
         bundle.putBoolean(kKEY_SMALL_CLICK, smallClick);
+        bundle.putBoolean(kKEY_CLOSE_WARNING, closeWithWarning);
         return bundle;
     }
 
