@@ -26,7 +26,7 @@ class SAAdMobVideoMediationAdapter : Adapter() {
     }
 
     override fun getSDKVersionInfo(): VersionInfo {
-        val splits = "8.0.4".split(".") // TODO: Make version number dynamic
+        val splits = "8.1.1".split(".") // TODO: Make version number dynamic
         return if (splits.size >= 3) {
             VersionInfo(splits[0].toInt(), splits[1].toInt(), splits[2].toInt())
         } else {
@@ -35,7 +35,7 @@ class SAAdMobVideoMediationAdapter : Adapter() {
     }
 
     override fun getVersionInfo(): VersionInfo {
-        val splits = "8.0.4".split(".") // TODO: Make version number dynamic
+        val splits = "8.1.1".split(".") // TODO: Make version number dynamic
         return if (splits.size >= 3) {
             VersionInfo(splits[0].toInt(), splits[1].toInt(), splits[2].toInt() * 100)
         } else {

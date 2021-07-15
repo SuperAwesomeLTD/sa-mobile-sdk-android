@@ -15,7 +15,7 @@ afterEvaluate {
         publications {
             release(MavenPublication) {
 
-                print 'Publishing $libraryName with description $libraryDescription'
+                print "Publishing $libraryName with description $libraryDescription Version: ${version} Group ${group}"
                 from components.release
 
                 pom.withXml {

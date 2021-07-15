@@ -33,6 +33,6 @@ repositories {
 dependencies {
     api project(':superawesome-base')
     implementation 'com.google.android.gms:play-services-ads:20.1.0'
-    implementation 'androidx.core:core-ktx:1.6.0-beta02'
+    implementation 'androidx.core:core-ktx:1.3.72'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }

@@ -4,12 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Canvas
 import android.util.AttributeSet
-import android.view.MotionEvent
-import android.view.SurfaceHolder
-import android.view.View
+import android.view.*
 import android.view.View.OnTouchListener
-import android.view.ViewGroup
-import android.view.ViewParent
 import android.widget.RelativeLayout
 import android.widget.VideoView
 import java.lang.ref.WeakReference
@@ -83,7 +79,8 @@ class VideoPlayer @JvmOverloads constructor(
         /**
          * Now add the new chrome instead of the old one
          */
-        this.chrome = chrome.also { it.setListener(this) }
+        chrome.setListener(this)
+        this.chrome = chrome
         val size = LayoutParams.MATCH_PARENT
         val params = LayoutParams(size, size)
         addView(this.chrome as? ViewGroup, params)

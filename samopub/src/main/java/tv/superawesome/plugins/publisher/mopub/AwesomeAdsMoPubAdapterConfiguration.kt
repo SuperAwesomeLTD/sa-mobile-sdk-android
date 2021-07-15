@@ -40,6 +40,6 @@ class AwesomeAdsMoPubAdapterConfiguration : BaseAdapterConfiguration() {
 
     override fun getBiddingToken(context: Context): String? = null
 
-    override fun getNetworkSdkVersion(): String = "8.0.4"
+    override fun getNetworkSdkVersion(): String = "8.1.1-kt1372"
 
 }
